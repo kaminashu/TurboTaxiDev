@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.example.projectone.presentation.ui.home.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/nav_viloyatlar"
+        android:name="com.example.projectone.presentation.ui.viloyatlar.ViloyatlarFragmanet"
+        android:label="@string/menu_viloyatlar"
+        tools:layout="@layout/fragment_viloyatlar"/>
+
+    <fragment
+        android:id="@+id/nav_foydalanuvchilar"
+        android:name="com.example.projectone.presentation.ui.foydalanuvchilar.FoydalanuvchilarFragmanet"
+        android:label="@string/menu_foydalanuvchilar"
+        tools:layout="@layout/fragment_foydalanuvchilar" />
+    <fragment
+        android:id="@+id/nav_malumotlar"
+        android:name="com.example.projectone.presentation.ui.malumotlar.MalumotlarFragment"
+        android:label="@string/menu_malumotlar"
+        tools:layout="@layout/fragment_malumotlar" />
+    <fragment
+        android:id="@+id/nav_restr"
+        android:name="com.example.projectone.presentation.ui.restr.RestrFragment"
+        android:label="@string/menu_reestr"
+        tools:layout="@layout/fragment_restr" />
+    <fragment
+        android:id="@+id/nav_hisobot"
+        android:name="com.example.projectone.presentation.ui.hisobot.HisobotFragment"
+        android:label="@string/menu_hisobot"
+        tools:layout="@layout/fragment_hisobot" />
+    <fragment
+        android:id="@+id/nav_order"
+        android:name="com.example.projectone.presentation.ui.order.OrderFragment"
+        android:label="@string/menu_order"
+        tools:layout="@layout/fragment_order" />
+    <fragment
+        android:id="@+id/nav_roole"
+        android:name="com.example.projectone.presentation.ui.roole.RooleFragment"
+        android:label="@string/menu_rote"
+        tools:layout="@layout/fragment_roole" />
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.projectone.presentation.ui.registers.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" />
+</navigation>
