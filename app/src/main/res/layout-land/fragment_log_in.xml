@@ -19,7 +19,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="#3246EE"
+        android:background="#15228F"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="@id/guideline2"
         app:layout_constraintRight_toRightOf="parent"
@@ -89,14 +89,16 @@
 
 
             <androidx.appcompat.widget.AppCompatButton
+                android:autoSizeTextType="uniform"
+                android:padding="10dp"
                 android:id="@+id/submitBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/shape_btn_login"
+                android:textColor="@color/white"
                 android:text="Submit"
                 android:layout_marginStart="30dp"
                 android:layout_marginEnd="30dp"
-                android:textSize="17sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textInputLayout2"
                 tools:layout_editor_absoluteX="30dp" />

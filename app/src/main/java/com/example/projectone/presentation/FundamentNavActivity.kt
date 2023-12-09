@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
+import android.window.OnBackInvokedDispatcher
 import com.google.android.material.navigation.NavigationView
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -66,4 +67,11 @@ class FundamentNavActivity : AppCompatActivity() {
           return Intent(context,FundamentNavActivity::class.java)
         }
     }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+     finishAffinity()
+    }
+
+
 }

@@ -7,6 +7,6 @@ import kotlin.math.log
 class RegistersViewModel : ViewModel() {
     fun isLogin(login:String,parol:String): Boolean {
         Log.d("TAG", "isLogin:$login $parol ")
-        return login=="kaminari" && parol=="123456"
+        return login=="Admin" && parol=="0"
     }
 }

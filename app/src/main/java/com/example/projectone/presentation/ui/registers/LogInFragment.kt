@@ -55,10 +55,11 @@ class LogInFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.submitBtn?.setOnClickListener {
-            val login = binding.loginEdt?.text.toString()
-            val parol = binding.parolEdt?.text.toString()
+            val login = binding.loginEdt.text.toString()
+            val parol = binding.parolEdt.text.toString()
             if (viewModel.isLogin(login, parol)) {
                 val intent = FundamentNavActivity.newIntnet(requireActivity())
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
                 startActivity(intent)
             }
         }
@@ -85,5 +86,6 @@ class LogInFragment : Fragment() {
                 }
             }
     }
+
 
 }

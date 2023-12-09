@@ -4,19 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#3246EE"
+    android:background="#15228F"
     tools:context=".presentation.ui.registers.LogInFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-
         android:layout_width="match_parent"
         android:layout_height="400dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
         android:background="@drawable/shape_login_bc"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="10dp">
+        app:layout_constraintVertical_bias="0.498"
+        tools:layout_editor_absoluteX="14dp">
 
         <ImageView
             android:id="@+id/imageView"
@@ -32,27 +30,27 @@
             android:id="@+id/textInputLayout"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:layout_marginTop="10dp"
-            android:hint="Login"
             android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="20dp"
+            android:hint="Login"
             android:theme="@style/ThemeOverlay.Material3.AutoCompleteTextView.OutlinedBox"
             app:layout_constraintTop_toBottomOf="@+id/imageView"
             tools:layout_editor_absoluteX="10dp">
 
             <EditText
                 android:id="@+id/loginEdt"
-                android:maxLines="1"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:maxLines="1" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayout2"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:layout_marginTop="10dp"
             android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="20dp"
             android:hint="Parol"
             android:theme="@style/ThemeOverlay.Material3.AutoCompleteTextView.OutlinedBox"
@@ -70,16 +68,20 @@
 
 
         <androidx.appcompat.widget.AppCompatButton
-            android:layout_marginStart="30dp"
-            android:layout_marginEnd="30dp"
+            android:id="@+id/submitBtn"
             android:layout_width="match_parent"
             android:layout_height="60dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
             android:layout_marginBottom="10dp"
+            android:autoSizeTextType="uniform"
             android:background="@drawable/shape_btn_login"
+            android:padding="10dp"
             android:text="Submit"
-            android:textSize="17sp"
+            android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayout2" />
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayout2"
+            tools:layout_editor_absoluteX="30dp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
