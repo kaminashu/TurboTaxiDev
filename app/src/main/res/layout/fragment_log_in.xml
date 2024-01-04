@@ -70,8 +70,7 @@
 
 
         <androidx.appcompat.widget.AppCompatButton
-            android:layout_marginStart="30dp"
-            android:layout_marginEnd="30dp"
+            android:id="@+id/submitBtn"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginBottom="10dp"
@@ -79,7 +78,8 @@
             android:text="Submit"
             android:textSize="17sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayout2" />
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayout2"
+            tools:layout_editor_absoluteX="30dp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

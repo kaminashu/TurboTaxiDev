@@ -3,6 +3,7 @@ package com.example.projectone.presentation
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import com.google.android.material.navigation.NavigationView
 import androidx.navigation.findNavController
@@ -12,8 +13,16 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.example.projectone.R
+import com.example.projectone.data.network.api.ApiCilent
+import com.example.projectone.data.network.dto.ApiDto
+import com.example.projectone.data.network.model.AuthUser
+import com.example.projectone.data.network.model.UserPost
 import com.example.projectone.databinding.ActivityFundamentBinding
+import kotlinx.coroutines.launch
+import org.json.JSONObject
+import retrofit2.create
 
 
 class FundamentNavActivity : AppCompatActivity() {
@@ -23,12 +32,16 @@ class FundamentNavActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityFundamentBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         setSupportActionBar(binding.appBarMain.toolbar)
-
+        val network = ApiCilent.getRetrofit().create(ApiDto::class.java)
+        lifecycleScope.launch {
+            val userPost=UserPost(AuthUser("bek_vil","uz","bek_vil"))
+            val mess = network.getLoginZapros(userPost).mess
+            Log.d("TAG", "onCreate: $mess")
+        }
 
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val navView: NavigationView = binding.navView
@@ -61,9 +74,10 @@ class FundamentNavActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
-    companion object{
-        fun newIntnet(context:Context):Intent{
-          return Intent(context,FundamentNavActivity::class.java)
+
+    companion object {
+        fun newIntnet(context: Context): Intent {
+            return Intent(context, FundamentNavActivity::class.java)
         }
     }
 }
