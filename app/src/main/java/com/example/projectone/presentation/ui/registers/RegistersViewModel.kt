@@ -1,13 +1,19 @@
 package com.example.projectone.presentation.ui.registers
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
-import kotlin.math.log
+import com.example.projectone.data.imple.RepoImple
+import com.example.projectone.domain.entities.RegResponseModel
+import com.example.projectone.domain.entities.UserAuthUser
+import com.example.projectone.domain.entities.UserModel
+import com.example.projectone.domain.usecases.GetUserUseCases
 
 class RegistersViewModel : ViewModel() {
-    fun isLogin(login:String,parol:String): Boolean {
-        Log.d("TAG", "isLogin:$login $parol ")
-        return login=="kam" && parol=="123"
-
+    private val imple = RepoImple()
+    private val getUserUseCases = GetUserUseCases(imple)
+    suspend fun isLogin(login: String, parol: String): RegResponseModel {
+        val userModel = UserModel(UserAuthUser(password = parol, login = login, lang = "uz"))
+        return getUserUseCases(userModel)
     }
+
+
 }

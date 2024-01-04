@@ -7,10 +7,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.example.projectone.R
 import com.example.projectone.databinding.FragmentLogInBinding
 import com.example.projectone.presentation.FundamentNavActivity
+import com.example.projectone.presentation.ui.sms.SmsFragment
+import kotlinx.coroutines.launch
 import java.lang.RuntimeException
 
 // TODO: Rename parameter arguments, choose names that match
@@ -57,14 +61,26 @@ class LogInFragment : Fragment() {
         binding.submitBtn?.setOnClickListener {
             val login = binding.loginEdt?.text.toString()
             val parol = binding.parolEdt?.text.toString()
-            if (viewModel.isLogin(login, parol)) {
-                val intent = FundamentNavActivity.newIntnet(requireActivity())
-                startActivity(intent)
+            lifecycleScope.launch {
+                val resp = viewModel.isLogin(login, parol)
+                if (resp.mess == "Muvaffaqiyat") {
+                    val newInstance = SmsFragment.newInstance(
+                        id = resp.data?.userIdent?.toInt() ?: UNKOWN,
+                        token = resp.data?.isToken?.toInt() ?: UNKOWN
+                    )
+                    requireActivity().supportFragmentManager.beginTransaction()
+                        .replace(R.id.fragmentContainer, newInstance).commit()
+                } else {
+                    Toast.makeText(requireActivity(), "Login yoki parol xato", Toast.LENGTH_SHORT)
+                        .show()
+                }
             }
         }
     }
 
+
     companion object {
+        const val UNKOWN = -1
         const val STACK_NAME = "Login_Stack"
 
         /**

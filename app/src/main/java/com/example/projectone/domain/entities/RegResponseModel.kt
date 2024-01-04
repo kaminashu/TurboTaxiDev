@@ -4,7 +4,7 @@ import com.example.projectone.data.network.model.Data
 import com.google.gson.annotations.SerializedName
 import javax.inject.Inject
 
-class RegResponseModel @Inject constructor(
+class RegResponseModel (
     val data: ResDataMoel? = null,
     val resId: Int? = null,
     val mess: String? = null
