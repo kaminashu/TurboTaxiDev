@@ -14,8 +14,8 @@ import com.example.projectone.databinding.FragmentSmsBinding
 class SmsFragment : Fragment() {
 
     companion object {
-        const val ID = "id"
-        const val TOKEN = "token"
+        private const val ID = "id"
+        private const val TOKEN = "token"
         fun newInstance(id: Int, token: Int) = SmsFragment().apply {
             arguments = Bundle().apply {
                 putInt(ID, id)
@@ -37,7 +37,7 @@ class SmsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding =
             FragmentSmsBinding.inflate(LayoutInflater.from(container?.context), container, false)
         return binding.root
@@ -47,7 +47,8 @@ class SmsFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this)[SmsViewModel::class.java]
         val token = bundle.getInt(TOKEN)
-        Log.d("TAG", "onActivityCreated: $TOKEN")
+        val id = bundle.getInt(ID)
+        Log.d("My_TAG", "onActivityCreated: $token and $id")
 
     }
 

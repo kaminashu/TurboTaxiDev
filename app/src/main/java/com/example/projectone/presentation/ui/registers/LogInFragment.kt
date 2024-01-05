@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.projectone.R
@@ -58,11 +59,16 @@ class LogInFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.progressBar?.visibility = View.GONE
         binding.submitBtn?.setOnClickListener {
+            binding.submitBtn.isVisible = false
             val login = binding.loginEdt?.text.toString()
             val parol = binding.parolEdt?.text.toString()
             lifecycleScope.launch {
+                binding.progressBar?.visibility = View.VISIBLE
                 val resp = viewModel.isLogin(login, parol)
+                binding.progressBar?.visibility = View.GONE
+                binding.submitBtn.isVisible = true
                 if (resp.mess == "Muvaffaqiyat") {
                     val newInstance = SmsFragment.newInstance(
                         id = resp.data?.userIdent?.toInt() ?: UNKOWN,

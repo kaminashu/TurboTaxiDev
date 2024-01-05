@@ -3,6 +3,9 @@ package com.example.projectone.data.imple
 import com.example.projectone.data.mapper.Mapper
 import com.example.projectone.data.network.api.ApiCilent
 import com.example.projectone.data.network.dto.ApiDto
+import com.example.projectone.domain.entities.CheckResponseSmsModel
+import com.example.projectone.domain.entities.ChekRequestSmsModel
+import com.example.projectone.domain.entities.ChekResponseSmsDataModel
 import com.example.projectone.domain.entities.RegResponseModel
 import com.example.projectone.domain.entities.UserModel
 import com.example.projectone.domain.repositories.UserRepository
@@ -14,6 +17,13 @@ class RepoImple : UserRepository {
         val post = mapper.mapperUserModelToUserPost(userModel)
         val loginZapros = network.getLoginZapros(post)
         return mapper.mapperModelRegRespToUserRegResponseModel(loginZapros)
+    }
+
+    override suspend fun chekSms(chekRequestSmsModel: ChekRequestSmsModel): CheckResponseSmsModel {
+        val sms = network.getSms(
+            mapper.mapperChekRequestSmsModelToChekRequestApiMopdel(chekRequestSmsModel)
+        )
+        return mapper.mapperChekResponseSmsApiToChekResponseSmsModel(sms)
     }
 
 }

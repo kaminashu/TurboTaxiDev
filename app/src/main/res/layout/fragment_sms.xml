@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#3246EE"
+    android:background="#20286A"
     tools:context=".presentation.ui.sms.SmsFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -61,11 +61,13 @@
             android:layout_marginBottom="10dp"
             android:background="@drawable/shape_btn_login"
             android:text="Submit"
+            android:textColor="@color/white"
             android:textSize="17sp"
             app:layout_constraintBottom_toTopOf="@+id/ortgaBtn"
             app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
             tools:layout_editor_absoluteX="30dp" />
         <androidx.appcompat.widget.AppCompatButton
+            android:textColor="@color/white"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:id="@+id/ortgaBtn"
