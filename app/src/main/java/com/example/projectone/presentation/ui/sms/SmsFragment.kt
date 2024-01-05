@@ -8,8 +8,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.lifecycleScope
 import com.example.projectone.R
 import com.example.projectone.databinding.FragmentSmsBinding
+import com.example.projectone.domain.entities.AuthSmscheck
+import com.example.projectone.domain.entities.ChekRequestSmsModel
+import kotlinx.coroutines.launch
 
 class SmsFragment : Fragment() {
 
@@ -48,6 +52,17 @@ class SmsFragment : Fragment() {
         viewModel = ViewModelProvider(this)[SmsViewModel::class.java]
         val token = bundle.getInt(TOKEN)
         val id = bundle.getInt(ID)
+        val auth = AuthSmscheck(
+            userIdent = id.toString(),
+            smsCode = "30697",
+            lang = "uz",
+            isToken = token.toString()
+        )
+        val chekRequestSmsModel = ChekRequestSmsModel(auth)
+        lifecycleScope.launch {
+            val chekSms = viewModel.chekSms(chekRequestSmsModel)
+            Log.d("My_TAG", "onActivityCreated: " + chekSms.mess)
+        }
         Log.d("My_TAG", "onActivityCreated: $token and $id")
 
     }
