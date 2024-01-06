@@ -8,11 +8,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import com.example.projectone.R
 import com.example.projectone.databinding.FragmentSmsBinding
 import com.example.projectone.domain.entities.AuthSmscheck
 import com.example.projectone.domain.entities.ChekRequestSmsModel
+import com.example.projectone.presentation.FundamentNavActivity
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class SmsFragment : Fragment() {
@@ -50,21 +54,34 @@ class SmsFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this)[SmsViewModel::class.java]
-        val token = bundle.getInt(TOKEN)
-        val id = bundle.getInt(ID)
-        val auth = AuthSmscheck(
-            userIdent = id.toString(),
-            smsCode = "30697",
-            lang = "uz",
-            isToken = token.toString()
-        )
-        val chekRequestSmsModel = ChekRequestSmsModel(auth)
-        lifecycleScope.launch {
-            val chekSms = viewModel.chekSms(chekRequestSmsModel)
-            Log.d("My_TAG", "onActivityCreated: " + chekSms.mess)
-        }
-        Log.d("My_TAG", "onActivityCreated: $token and $id")
+        binding.progressBar2.visibility=View.GONE
+        tasdiqlash()
 
     }
+
+    private fun tasdiqlash() {
+        binding.submitBtn.setOnClickListener{
+            binding.progressBar2.visibility=View.VISIBLE
+            val id = bundle.getInt(ID)
+            val token = bundle.getInt(TOKEN)
+            val code=binding.smsEdt.text.toString()
+            binding.submitBtn.isVisible=false
+            binding.ortgaBtn.isVisible=false
+            lifecycleScope.launch {
+                val sms = viewModel.chekSms(token, id, code)
+                if(sms.resId==0){
+                    val intent=FundamentNavActivity.newIntnet(requireActivity())
+                    startActivity(intent)
+                }else{
+                    Toast.makeText(requireActivity(), "Login yoki parol xato", Toast.LENGTH_SHORT).show()
+                }
+                binding.submitBtn.isVisible=true
+                binding.ortgaBtn.isVisible=true
+                binding.progressBar2.visibility=View.GONE
+            }
+
+        }
+    }
+
 
 }

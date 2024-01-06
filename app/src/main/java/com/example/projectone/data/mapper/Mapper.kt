@@ -44,7 +44,7 @@ class Mapper {
             userName = chekResponseSms.data?.userName ?: "UNKOWN",
             userPhoneMask = chekResponseSms.data?.userPhoneMask ?: "UNKOWN",
             userRegion = chekResponseSms.data?.userRegion ?: "UNKOWN",
-            userRolename = chekResponseSms.data?.userRolename ?: "UNKOWN",
+            userRolename = chekResponseSms.data?.userRolename ?: "UNKOWN"
         )
         return CheckResponseSmsModel(
             data = data,
