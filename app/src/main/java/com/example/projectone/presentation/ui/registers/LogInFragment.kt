@@ -59,17 +59,17 @@ class LogInFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.progressBar?.visibility = View.GONE
-        binding.submitBtn?.setOnClickListener {
+        binding.progressBar.visibility = View.GONE
+        binding.submitBtn.setOnClickListener {
             binding.submitBtn.isVisible = false
-            val login = binding.loginEdt?.text.toString()
-            val parol = binding.parolEdt?.text.toString()
+            val login = binding.loginEdt.text.toString()
+            val parol = binding.parolEdt.text.toString()
             lifecycleScope.launch {
-                binding.progressBar?.visibility = View.VISIBLE
+                binding.progressBar.visibility = View.VISIBLE
                 val resp = viewModel.isLogin(login, parol)
-                binding.progressBar?.visibility = View.GONE
+                binding.progressBar.visibility = View.GONE
                 binding.submitBtn.isVisible = true
-                if (resp.mess == "Muvaffaqiyat") {
+                if (resp.mess == RESPONSE_MESSAGE) {
                     val newInstance = SmsFragment.newInstance(
                         id = resp.data?.userIdent?.toInt() ?: UNKOWN,
                         token = resp.data?.isToken?.toInt() ?: UNKOWN
@@ -87,6 +87,7 @@ class LogInFragment : Fragment() {
 
     companion object {
         const val UNKOWN = -1
+        private const val RESPONSE_MESSAGE = "Muvaffaqiyat"
         const val STACK_NAME = "Login_Stack"
 
         /**

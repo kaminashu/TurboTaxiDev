@@ -2,6 +2,7 @@ package com.example.projectone.presentation.ui.restr
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,7 @@ import com.example.projectone.R
 class RestrFragment : Fragment() {
 
     companion object {
+        const val TAG="MY_TAG"
         fun newInstance() = RestrFragment()
     }
 
@@ -25,8 +27,10 @@ class RestrFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(RestrViewModel::class.java)
-        // TODO: Use the ViewModel
+        viewModel = ViewModelProvider(this)[RestrViewModel::class.java]
+   //     Log.d(TAG, "onActivityCreated: ${viewModel.getReestr()}")
     }
+
+
 
 }

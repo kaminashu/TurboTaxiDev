@@ -5,7 +5,8 @@ import com.example.projectone.data.network.api.ApiCilent
 import com.example.projectone.data.network.dto.ApiDto
 import com.example.projectone.domain.entities.CheckResponseSmsModel
 import com.example.projectone.domain.entities.ChekRequestSmsModel
-import com.example.projectone.domain.entities.ChekResponseSmsDataModel
+import com.example.projectone.domain.entities.ReestrRequest
+import com.example.projectone.domain.entities.ReestrResponse
 import com.example.projectone.domain.entities.RegResponseModel
 import com.example.projectone.domain.entities.UserModel
 import com.example.projectone.domain.repositories.UserRepository
@@ -24,6 +25,10 @@ class RepoImple : UserRepository {
             mapper.mapperChekRequestSmsModelToChekRequestApiMopdel(chekRequestSmsModel)
         )
         return mapper.mapperChekResponseSmsApiToChekResponseSmsModel(sms)
+    }
+    override suspend fun getReestr(reestrRequest: ReestrRequest): ReestrResponse {
+        val reestr = network.getReestr(mapper.mapperRestrRequestToReestrRequestAPi(reestrRequest))
+        return mapper.mapperReestResponseApiToReestrResponse(reestr)
     }
 
 }

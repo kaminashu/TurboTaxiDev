@@ -1,4 +1,4 @@
-package com.example.projectone.data.network.model
+package com.example.projectone.data.network.model.sms
 
 import com.google.gson.annotations.SerializedName
 

@@ -15,15 +15,20 @@ import com.example.projectone.R
 import com.example.projectone.databinding.FragmentSmsBinding
 import com.example.projectone.domain.entities.AuthSmscheck
 import com.example.projectone.domain.entities.ChekRequestSmsModel
+import com.example.projectone.domain.entities.ReestrReqParamsSubModel
+import com.example.projectone.domain.entities.ReestrReqSubOrderModel
+import com.example.projectone.domain.entities.ReestrRequest
 import com.example.projectone.presentation.FundamentNavActivity
+import com.example.projectone.presentation.ui.registers.LogInFragment
+import com.example.projectone.presentation.ui.restr.RestrFragment.Companion.TAG
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class SmsFragment : Fragment() {
-
     companion object {
         private const val ID = "id"
         private const val TOKEN = "token"
+        private const val RESPONSE_ID = 0
         fun newInstance(id: Int, token: Int) = SmsFragment().apply {
             arguments = Bundle().apply {
                 putInt(ID, id)
@@ -54,34 +59,40 @@ class SmsFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this)[SmsViewModel::class.java]
-        binding.progressBar2.visibility=View.GONE
-        tasdiqlash()
-
-    }
-
-    private fun tasdiqlash() {
-        binding.submitBtn.setOnClickListener{
-            binding.progressBar2.visibility=View.VISIBLE
-            val id = bundle.getInt(ID)
-            val token = bundle.getInt(TOKEN)
-            val code=binding.smsEdt.text.toString()
-            binding.submitBtn.isVisible=false
-            binding.ortgaBtn.isVisible=false
-            lifecycleScope.launch {
-                val sms = viewModel.chekSms(token, id, code)
-                if(sms.resId==0){
-                    val intent=FundamentNavActivity.newIntnet(requireActivity())
-                    startActivity(intent)
-                }else{
-                    Toast.makeText(requireActivity(), "Login yoki parol xato", Toast.LENGTH_SHORT).show()
-                }
-                binding.submitBtn.isVisible=true
-                binding.ortgaBtn.isVisible=true
-                binding.progressBar2.visibility=View.GONE
-            }
-
+        binding.progressBar2.visibility = View.GONE
+        binding.submitBtn.setOnClickListener {
+            tasdiqlash()
+        }
+        binding.ortgaBtn.setOnClickListener {
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.fragmentContainer, LogInFragment()).commit()
         }
     }
 
-
+    private fun tasdiqlash() {
+        binding.progressBar2.visibility = View.VISIBLE
+        val id = bundle.getInt(ID)
+        val token = bundle.getInt(TOKEN)
+        val code = binding.smsEdt.text.toString()
+        binding.submitBtn.isVisible = false
+        binding.ortgaBtn.isVisible = false
+        lifecycleScope.launch {
+            val sms = viewModel.chekSms(token, id, code)
+            /*   val reqRestrParamsSubModel=ReestrReqParamsSubModel(countryId = 13, status = "s1")
+               val requestReqSubOrderModel=ReestrReqSubOrderModel(userIdent = id.toString(),action = "order_list",lang = "uz",reqRestrParamsSubModel = reqRestrParamsSubModel,isToken = token.toString())
+               val reestrRequest=ReestrRequest(requestReqSubOrderModel = requestReqSubOrderModel)
+               val response=viewModel.getReestr(reestrRequest)
+               Log.d(TAG, "tasdiqlash: ${response.list?.get(1)?.status}")*/
+            if (sms.resId == RESPONSE_ID) {
+                val intent = FundamentNavActivity.newIntnet(requireActivity())
+                startActivity(intent)
+            } else {
+                Toast.makeText(requireActivity(), "Login yoki parol xato", Toast.LENGTH_SHORT)
+                    .show()
+            }
+            binding.submitBtn.isVisible = true
+            binding.ortgaBtn.isVisible = true
+            binding.progressBar2.visibility = View.GONE
+        }
+    }
 }

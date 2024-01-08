@@ -5,10 +5,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#20286A"
-    tools:context=".presentation.ui.registers.LogInFragment">
+    tools:context=".presentation.ui.sms.SmsFragment">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#FFFF"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/guideline3">
+        <ImageView
+            android:src="@drawable/iconlog"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
+        android:id="@+id/constrain1id"
+        android:layout_width="0dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/guideline3"
         android:layout_height="400dp"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
@@ -22,7 +39,7 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginTop="30dp"
-            android:src="@drawable/user"
+            android:src="@drawable/sms"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -34,37 +51,17 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="20dp"
-            android:hint="Login"
+            android:hint="SMS"
             android:theme="@style/ThemeOverlay.Material3.AutoCompleteTextView.OutlinedBox"
             app:layout_constraintTop_toBottomOf="@+id/imageView"
+            app:startIconDrawable="@drawable/sms"
             tools:layout_editor_absoluteX="10dp">
 
             <EditText
-                android:id="@+id/loginEdt"
+                android:id="@+id/smsEdt"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:maxLines="1" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayout2"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="20dp"
-            android:hint="Parol"
-            android:theme="@style/ThemeOverlay.Material3.AutoCompleteTextView.OutlinedBox"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
-            tools:layout_editor_absoluteX="0dp">
-
-            <EditText
-                android:id="@+id/parolEdt"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:maxLines="1"
-                app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
-                tools:layout_editor_absoluteX="-25dp" />
         </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -79,19 +76,42 @@
             android:text="Submit"
             android:textColor="@color/white"
             android:textSize="17sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayout2"
+            app:layout_constraintBottom_toTopOf="@+id/ortgaBtn"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
             tools:layout_editor_absoluteX="30dp" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/ortgaBtn"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/shape_btn_login"
+            android:text="Ortga"
+            android:textColor="@color/white"
+            android:textSize="17sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/submitBtn"
+            tools:layout_editor_absoluteX="30dp" />
+
+        <ProgressBar
+            android:id="@+id/progressBar2"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textInputLayout" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="100dp"
-        android:layout_height="70dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
